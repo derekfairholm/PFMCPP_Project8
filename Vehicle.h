@@ -3,22 +3,21 @@
 #include <string>
 #include <iostream>
 
+struct HighwayPatrol;
+
 struct Vehicle
 {
-    Vehicle(const std::string& n) : name(n) { }
+    Vehicle(const std::string& n);
     
-    virtual void setSpeed(int s)
-    {
-        std::cout << "\nHighway is adjusting " << name << "'s speed to " << s << " mph" << std::endl;
-        speed = s;
-    }
+    virtual ~Vehicle();
+    Vehicle(const Vehicle&);
+    Vehicle& operator = (const Vehicle&);
     
-    virtual void tryToEvade()
-    {
-        std::cout << name << ": you'll never take me alive, ya dirty coppers!" << std::endl;
-        setSpeed(100);
-    }
+    virtual void setSpeed(int s);
+    virtual void tryToEvade();
+
 protected:
     int speed = 0;
     std::string name;
+    friend HighwayPatrol;
 };
